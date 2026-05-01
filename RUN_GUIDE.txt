@@ -1,0 +1,68 @@
+╔════════════════════════════════════════════════════════════════════════╗
+║                                                                        ║
+║                🚀 HOW TO RUN FINPREDICT AI SYSTEM 🚀                    ║
+║                                                                        ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+Follow these steps exactly to get your Intelligent Credit Assessment System 
+running with both the PHP Frontend and the Python AI Backend.
+
+---
+STEP 1: DATABASE SETUP (XAMPP)
+---
+1. Open the XAMPP Control Panel.
+2. Start 'Apache' and 'MySQL'.
+3. Open your browser and go to: http://localhost/phpmyadmin
+4. Create a NEW database named: finpredict_db
+5. Click on the 'Import' tab.
+6. Choose the file located at: 
+   C:\xampp\htdocs\finpredict-sample\sql\schema.sql
+7. Click 'Go' at the bottom to create the tables.
+
+---
+STEP 2: PYTHON AI BACKEND SETUP
+---
+1. Open a Command Prompt (cmd) or Terminal.
+2. Navigate to the ML folder:
+   cd C:\xampp\htdocs\finpredict-sample\ml
+3. Install required libraries (only needed once):
+   pip install -r requirements.txt
+4. (Optional) If the model file is missing, train it:
+   python train_model.py
+5. START THE AI SERVER:
+   python api.py
+   
+⚠️ IMPORTANT: Keep this terminal window OPEN. If you close it, the AI logic 
+will switch to "Safe Mode" (Traditional logic) instead of using the ML model.
+
+---
+STEP 3: ACCESS THE APPLICATION
+---
+1. Open your browser and go to:
+   http://localhost/finpredict-sample/pages/index.php
+   
+2. Fill out the customer form:
+   - Name, Age, Monthly Income, etc.
+   
+3. Click "Calculate Credit Score".
+
+---
+STEP 4: VERIFY AI IS WORKING
+---
+On the Results Page, look for the "AI Model Adjustment" or check your Python 
+terminal window. You should see logs like "127.0.0.1 - - [Predict Request]" 
+whenever a score is calculated.
+
+---
+TROUBLESHOOTING
+---
+- Error: "Model not found": Run 'python train_model.py' first.
+- Error: "Flask is not recognized": Ensure Python is added to your PATH.
+- PHP Error: "Database connection failed": Check 'config/db_connection.php' 
+  to ensure your MySQL username/password match (default is 'root' and '').
+
+---
+Project: FinPredict - Intelligent Credit Limit Predictor
+Status: ✅ Ready for Submission
+University: Group Project Demo
+---

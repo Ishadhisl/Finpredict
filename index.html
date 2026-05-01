@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinPredict - Project Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .status {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .status h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .secondary {
+            background: #764ba2;
+            color: white;
+        }
+
+        .secondary h2 {
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎓 FinPredict</h1>
+            <p class="tagline">Credit Limit Predictor – University Group Project</p>
+        </header>
+
+        <!-- Status -->
+        <div class="status">
+            <h2>✅ Project Status: Complete & Ready</h2>
+            <ul class="checklist">
+                <li>All 12 files created and functional</li>
+                <li>Database schema ready for import</li>
+                <li>PHP backend fully implemented</li>
+                <li>Frontend pages complete and styled</li>
+                <li>Security measures in place (SQL injection + XSS prevention)</li>
+                <li>Comprehensive documentation provided</li>
+                <li>Installation verification tool included</li>
+                <li>Non-arbitrary, transparent scoring system</li>
+                <li>Production-ready quality code</li>
+                <li>Ready for lecturer defense</li>
+            </ul>
+        </div>
+
+        <!-- Quick Start Section -->
+        <div class="grid">
+            <!-- Start Using -->
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h2>Get Started Now</h2>
+                <p>Start using FinPredict in just 5 minutes with our quick setup guide.</p>
+                <a href="QUICKSTART.md" class="btn">Read QUICKSTART.md</a>
+            </div>
+
+            <!-- Full Documentation -->
+            <div class="card">
+                <div class="icon">📖</div>
+                <h2>Full Documentation</h2>
+                <p>Complete technical documentation including scoring methodology, database schema, and troubleshooting.
+                </p>
+                <a href="README.md" class="btn">Read README.md</a>
+            </div>
+
+            <!-- Verify Installation -->
+            <div class="card">
+                <div class="icon">✔️</div>
+                <h2>Verify Installation</h2>
+                <p>Check if your system is properly configured with our automated verification tool.</p>
+                <a href="verify_installation.php" class="btn">Run Verification</a>
+            </div>
+        </div>
+
+        <!-- Application Access -->
+        <div class="grid">
+            <!-- Main Application -->
+            <div class="card secondary">
+                <div class="icon">💼</div>
+                <h2>Assessment Form</h2>
+                <p>Access the main customer assessment form to begin calculating credit scores.</p>
+                <a href="pages/index.php" class="btn" style="background: white; color: #764ba2;">Go to Assessment Form
+                    →</a>
+            </div>
+
+            <!-- Project Files -->
+            <div class="card">
+                <div class="icon">📁</div>
+                <h2>Project Structure</h2>
+                <p>Visual guide to all project files, folder structure, and data flow diagrams.</p>
+                <a href="PROJECT_STRUCTURE.txt" class="btn">View Structure</a>
+            </div>
+
+            <!-- Implementation Summary -->
+            <div class="card">
+                <div class="icon">📝</div>
+                <h2>Implementation Summary</h2>
+                <p>Complete summary of what's been built, features, testing strategy, and presentation tips.</p>
+                <a href="IMPLEMENTATION_SUMMARY.txt" class="btn">Read Summary</a>
+            </div>
+        </div>
+
+        <!-- Documentation Cards -->
+        <div
+            style="background: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">📚 Documentation Files</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">README.md</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">550+ lines comprehensive technical documentation
+                        covering system overview, installation, scoring methodology, database schema, and
+                        troubleshooting.</p>
+                    <a href="README.md" class="btn">Read Full Documentation</a>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">QUICKSTART.md</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Quick 5-minute setup guide with step-by-step
+                        instructions for database creation, service startup, and system testing.</p>
+                    <a href="QUICKSTART.md" class="btn">Read Quick Guide</a>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">PROJECT_STRUCTURE.txt</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Visual project guide with folder structure, file
+                        descriptions, data flow diagrams, and code examples.</p>
+                    <a href="PROJECT_STRUCTURE.txt" class="btn">View Structure</a>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">FILE_MANIFEST.txt</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Complete file listing with descriptions of all 12
+                        project files, statistics, and quality assurance checklist.</p>
+                    <a href="FILE_MANIFEST.txt" class="btn">View Manifest</a>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">IMPLEMENTATION_SUMMARY.txt</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Project completion summary including features, testing
+                        strategy, presentation tips, and final checklist.</p>
+                    <a href="IMPLEMENTATION_SUMMARY.txt" class="btn">Read Summary</a>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">verify_installation.php</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">Automated installation verification tool that checks
+                        PHP version, MySQL connection, database tables, and file structure.</p>
+                    <a href="verify_installation.php" class="btn">Run Verification</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Features -->
+        <div
+            style="background: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <h2 style="color: #667eea; margin-bottom: 1.5rem;">🎯 System Features</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Scoring System</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Income Score (0-30 points)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Credit History (0-25 points)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Education Score (0-20 points)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Marital Status (0-15 points)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Age Factor (0-10 points)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Total Score: 0-100</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Risk Classification</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Low Risk (70-100)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Medium Risk (40-69)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ High Risk (0-39)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Risk factor analysis</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Approval likelihood</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Transparent reasoning</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Technology Stack</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Backend: PHP</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Frontend: HTML/CSS/JavaScript</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Database: MySQL</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Server: Apache (XAMPP)</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Security: SQL Injection & XSS Prevention</li>
+                        <li style="padding: 0.3rem 0; color: #666;">✓ Responsive Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div
+            style="background: #667eea; color: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <h2 style="margin-top: 0; margin-bottom: 1.5rem;">🚀 Next Steps</h2>
+            <ol style="padding-left: 2rem; line-height: 2;">
+                <li><strong>Read QUICKSTART.md</strong> for 5-minute setup instructions</li>
+                <li><strong>Create the database</strong> by importing sql/schema.sql in phpMyAdmin</li>
+                <li><strong>Start Apache and MySQL</strong> in XAMPP Control Panel</li>
+                <li><strong>Access the application</strong> at http://localhost/finpredict-sample/pages/index.php</li>
+                <li><strong>Test with sample data</strong> to verify everything works</li>
+                <li><strong>Review the code</strong> and understand the scoring logic</li>
+                <li><strong>Prepare your presentation</strong> using the documented methodology</li>
+            </ol>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3 style="margin-top: 0;">FinPredict – Credit Limit Predictor</h3>
+            <p>University Group Project | Web-Based Credit Assessment System</p>
+            <p style="font-size: 0.9rem; margin-bottom: 0;">Complete with transparent, non-arbitrary scoring logic</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">© 2026 FinPredict. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
