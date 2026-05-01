@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from ml.api import get_prediction
 import os
@@ -8,6 +8,11 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def index():
+    # Try to serve index.html from the root folder, or from pages/ if it's there
+    if os.path.exists('index.html'):
+        return send_file('index.html')
+    elif os.path.exists('pages/index.html'):
+        return send_file('pages/index.html')
     return "Finpredict API is Running"
 
 @app.route('/predict', methods=['POST'])
