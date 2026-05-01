@@ -42,13 +42,13 @@ include_once __DIR__ . '/../config/db_connection.php';
 
 class CreditScoreCalculator {
     
-    // Income thresholds (monthly income in dollars)
-    private $AVERAGE_MONTHLY_INCOME = 4000;
-    private $HIGH_INCOME_THRESHOLD = 8000;
+    // Income thresholds (monthly income in LKR — Sri Lanka 2024)
+    private $AVERAGE_MONTHLY_INCOME = 60000;   // LKR 60,000 = working class baseline
+    private $HIGH_INCOME_THRESHOLD  = 120000;  // LKR 120,000 = above average
     
-    // Credit limit thresholds
-    private $MIN_CREDIT_LIMIT = 500;
-    private $HIGH_CREDIT_LIMIT = 20000;
+    // Credit limit thresholds (LKR)
+    private $MIN_CREDIT_LIMIT  = 15000;   // LKR 15,000 minimum
+    private $HIGH_CREDIT_LIMIT = 300000;  // LKR 300,000 = high trust baseline
     
     /**
      * Calculate credit score based on customer data
@@ -120,12 +120,23 @@ class CreditScoreCalculator {
     }
 
     /**
-     * Call the Python Flask API
+     * Call the Python Flask API (Sri Lanka ML Model)
+     * Passes all 6 form inputs to the model.
      */
     private function callPytonMLApi($data) {
         $url = 'http://127.0.0.1:5000/predict';
         
-        $json_data = json_encode($data);
+        // Send ALL 6 inputs — new model uses every feature
+        $payload = [
+            'age'                   => $data['age'],
+            'gender'                => $data['gender'],
+            'education_level'       => $data['education_level'],
+            'marital_status'        => $data['marital_status'],
+            'monthly_income'        => $data['monthly_income'],
+            'existing_credit_limit' => $data['existing_credit_limit']
+        ];
+        
+        $json_data = json_encode($payload);
         
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -135,9 +146,9 @@ class CreditScoreCalculator {
             'Content-Type: application/json',
             'Content-Length: ' . strlen($json_data)
         ]);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 2); // 2 second timeout - fail fast
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         
-        $result = curl_exec($ch);
+        $result    = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         

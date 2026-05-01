@@ -83,13 +83,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = "Please correct the following errors:\n" . implode("\n", $validation_errors);
     } else {
         
-        // Step 3: Insert customer data into database
-        $sql = "INSERT INTO customers (name, email, age, gender, education_level, marital_status, monthly_income, existing_credit_limit) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        $stmt = $conn->prepare($sql);
-        
-        if ($stmt) {
+        // Step 3: Insert or Update customer data in database (Handle returning customers)
+        $check_sql = "SELECT customer_id FROM customers WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $customer_data['email']);
+        $check_stmt->execute();
+        $result = $check_stmt->get_result();
+        $existing_customer = $result->fetch_assoc();
+        $check_stmt->close();
+
+        if ($existing_customer) {
+            // Update existing customer
+            $customer_id = $existing_customer['customer_id'];
+            $sql = "UPDATE customers SET name = ?, age = ?, gender = ?, education_level = ?, marital_status = ?, monthly_income = ?, existing_credit_limit = ? WHERE customer_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param(
+                "sissdddi",
+                $customer_data['name'],
+                $customer_data['age'],
+                $customer_data['gender'],
+                $customer_data['education_level'],
+                $customer_data['marital_status'],
+                $customer_data['monthly_income'],
+                $customer_data['existing_credit_limit'],
+                $customer_id
+            );
+        } else {
+            // Insert new customer
+            $sql = "INSERT INTO customers (name, email, age, gender, education_level, marital_status, monthly_income, existing_credit_limit) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param(
                 "ssissddd",
                 $customer_data['name'],
@@ -101,9 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $customer_data['monthly_income'],
                 $customer_data['existing_credit_limit']
             );
-            
+        }
+        
+        if ($stmt) {
             if ($stmt->execute()) {
-                $customer_id = $stmt->insert_id;
+                if (!$existing_customer) {
+                    $customer_id = $stmt->insert_id;
+                }
                 
                 // Step 4: Calculate credit score
                 $calculator = new CreditScoreCalculator();
@@ -371,8 +398,16 @@ $has_results = isset($_SESSION['credit_score']) && !empty($error_message) === fa
                         <span class="breakdown-label">Age Score</span>
                         <span class="breakdown-score"><?php echo intval($score_data['age_score']); ?>/10</span>
                     </div>
+                    <?php if (isset($score_data['ml_adjustment']) && $score_data['ml_adjustment'] != 0): ?>
+                    <div class="breakdown-item" style="background-color: #f0f8ff;">
+                        <span class="breakdown-label"><strong>AI Model Adjustment</strong></span>
+                        <span class="breakdown-score" style="color: <?php echo $score_data['ml_adjustment'] > 0 ? '#27ae60' : '#e74c3c'; ?>;">
+                            <strong><?php echo ($score_data['ml_adjustment'] > 0 ? '+' : '') . intval($score_data['ml_adjustment']); ?></strong>
+                        </span>
+                    </div>
+                    <?php endif; ?>
                     <div class="breakdown-item" style="border-bottom: none; font-weight: bold; font-size: 1.1rem;">
-                        <span class="breakdown-label">Total Score</span>
+                        <span class="breakdown-label">Total Score (AI Predicted)</span>
                         <span class="breakdown-score"><?php echo $credit_score; ?>/100</span>
                     </div>
                 </div>
